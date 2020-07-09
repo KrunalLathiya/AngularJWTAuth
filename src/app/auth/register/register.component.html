@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h1 class="page-title">User Registration</h1>
+        <form #registerForm="ngForm">
+          <div class="form-group">
+            <div *ngIf="errors.length > 0" class="alert alert-danger">
+            <ul *ngFor = "let error of errors">
+                <li>{{ error }}</li>
+            </ul>
+            </div>
+            <label for="username">Username</label>
+           <input type="text"
+                   class="form-control"
+                   [(ngModel)] = "formData.username"
+                   name="username"
+                   #username = "ngModel"
+                   required>
+          </div>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)"
+            class="alert alert-danger">
+            <div *ngIf="username.errors.required">
+              Username is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+                   class="form-control"
+                   [(ngModel)] = "formData.email"
+                   name="email"
+                   #email = "ngModel"
+                   required>
+          </div>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+              Email is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   class="form-control"
+                   [(ngModel)] = "formData.password"
+                   #password = "ngModel"
+                   name="password"
+                   required>
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+              Password is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="passwordConfirmation">Confirm Password</label>
+            <input type="password"
+                   class="form-control"
+                   [(ngModel)] = "formData.passwordConfirmation"
+                   #passwordConfirmation = "ngModel"
+                   name="passwordConfirmation"
+                   required>
+          </div>
+           <div *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched)"
+            class="alert alert-danger">
+            <div *ngIf="passwordConfirmation.errors.required">
+              Confirm Password is required
+            </div>
+          </div>
+          <button 
+          (click) = "register()"
+          type="submit" 
+          class="btn btn-warning"
+          [disabled] = "!registerForm.form.valid">Register</button>
+        </form>
+      </div>
+    </div>
+</div>
